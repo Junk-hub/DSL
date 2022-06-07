@@ -1,0 +1,13 @@
+LIST mylist;
+mylist.ADD(123);
+a = 5;
+b = 6;
+c = a + b;
+mylist.ADD(7);
+mylist.ADD(6);
+mylist.ADD(4);
+PRINT;
+mylist.REMOVE(6);
+mylist.CONTAINS(7);
+PRINT;
+mylist.CLEAR();

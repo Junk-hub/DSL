@@ -1,0 +1,47 @@
+lang -> expr+
+expr -> body ENDL
+body -> expr_assign | if_op | while_op | do_while_op | for_op | print | linkedlist
+expr_value -> value (OP value)*
+value -> (VAR | DIGIT) | infinity
+infinity -> L_BC expr_value R_BC
+condition -> VAR COMPARE_OP expr_value
+condition_in_br -> L_BC condition R_BC
+if_op -> IF condition_in_br body+ else_op?
+else_op -> ELSE expr
+while_op -> WHILE condition_in_br body+
+do_while_op -> DO body+ WHILE condition_in_br
+for_op -> FOR L_BC assign DIV condition DIV assign R_BC body+
+expr_assign -> assign (DIV assign)*
+assign -> VAR ASSIGN_OP expr_value
+print -> PRINT (L_BC (VAR | DIGIT) R_BC)?
+
+linkedlist -> list_initialize | list_op
+list_initialize -> LIST VAR
+list_op -> VAR POINT (ADD | REMOVE | CLEAR | SIZE | GET | ISEMPTY | CONTAINS) L_BC DIGIT? R_BC
+
+VAR -> "^[a-z]\\w*$"
+DIGIT -> "^0|[1-9][0-9]*$"
+ASSIGN_OP -> "^=$"
+OP -> "^[-|+|/|*]$"
+L_BC -> "^($"
+R_BC -> "^)$"
+ENDL -> "^;$"
+COMPARE_OP -> "^==|<|>|!=|<=|>=$"
+POINT -> "^.$"
+
+IF -> "^IF$"
+ELSE -> "^ELSE$"
+WHILE -> "^WHILE$"
+DO -> "^DO$"
+FOR -> "^FOR$"
+DIV -> "^,$"
+PRINT -> "^PRINT$"
+
+LIST -> "^LIST$"
+ADD -> "^ADD$"
+REMOVE -> "^REMOVE$"
+CLEAR -> "^CLEAR$"
+SIZE -> "^SIZE$"
+GET -> "^GET$"
+ISEMPTY -> "^ISEMPTY$"
+CONTAINS -> "^CONTAINS$"
